@@ -31,6 +31,15 @@ usage() {
 
 # ─── Package lists ────────────────────────────────────────────────────────────
 
+# AMD iGPU drivers (safe to install on any AMD CPU with integrated graphics)
+AMD_PKGS=(
+    mesa
+    vulkan-radeon
+    libva-mesa-driver
+    mesa-vdpau
+    xf86-video-amdgpu
+)
+
 PACMAN_PKGS=(
     hyprland
     hyprpaper
@@ -85,6 +94,9 @@ install_packages() {
     info "Packages to install via pacman: ${PACMAN_PKGS[*]}"
     info "Packages to install via yay (AUR): ${AUR_PKGS[*]}"
     echo ""
+
+    log "Installing AMD GPU drivers..."
+    sudo pacman -S --needed --noconfirm "${AMD_PKGS[@]}"
 
     log "Installing pacman packages..."
     sudo pacman -S --needed --noconfirm "${PACMAN_PKGS[@]}"
