@@ -1,0 +1,125 @@
+/* ─── Inkypinky Waybar ─── */
+{
+  "layer": "top",
+  "position": "top",
+  "margin-top": 1,
+  "margin-left": 2,
+  "margin-right": 2,
+  "exclusive": true,
+  "fixed-center": true,
+
+  "hyprland/workspaces": {
+    "active-only": false,
+    "all-outputs": true,
+    "format": "{icon}",
+    "show-special": false,
+    "on-click": "activate",
+    "on-scroll-up": "hyprctl dispatch workspace e+1",
+    "on-scroll-down": "hyprctl dispatch workspace e-1",
+    "persistent-workspaces": { "*": 5 },
+    "format-icons": {
+      "active": "●",
+      "1": "1",
+      "2": "2",
+      "3": "3",
+      "4": "4",
+      "5": "5"
+    }
+  },
+
+  "clock": {
+    "interval": 1,
+    "format": " {:%H:%M}",
+    "format-alt": "󰃶 {:%A, %d %B}",
+    "tooltip-format": "<tt><small>{calendar}</small></tt>",
+    "calendar": {
+      "mode": "month",
+      "on-scroll": 1,
+      "format": {
+        "months":   "<span color='#D18BA2'><b>{}</b></span>",
+        "days":     "<span color='#c8c8c8'>{}</span>",
+        "weeks":    "<span color='#919ab7'><b>W{:%V}</b></span>",
+        "weekdays": "<span color='#9f859f'><b>{}</b></span>",
+        "today":    "<span color='#D18BA2'><b><u>{}</u></b></span>"
+      }
+    },
+    "actions": {
+      "on-click-right": "mode",
+      "on-scroll-up":   "shift_up",
+      "on-scroll-down": "shift_down"
+    }
+  },
+
+  "battery": {
+    "format": "{icon}",
+    "format-charging": "󰂄",
+    "format-plugged":  "󱘖",
+    "format-full":     "󰁹",
+    "states": { "warning": 30, "critical": 15 },
+    "format-icons": ["󰂎","󰁺","󰁻","󰁼","󰁽","󰁾","󰁿","󰂀","󰂁","󰂂","󰁹"],
+    "tooltip": true,
+    "tooltip-format": "{capacity}% — {timeTo}\n{power:.1f}W",
+    "on-click": "$HOME/.config/waybar/scripts/power-profile-menu.sh"
+  },
+
+  "pulseaudio": {
+    "format": "{icon}",
+    "format-muted": "󰖁",
+    "format-icons": { "default": ["󰕿", "󰕿", "󰖀", "󰕾"] },
+    "min-length": 1,
+    "scroll-step": 5,
+    "on-click":       "pavucontrol",
+    "on-click-right": "pactl set-sink-mute @DEFAULT_SINK@ toggle",
+    "on-scroll-up":   "wpctl set-volume -l 1.0 @DEFAULT_AUDIO_SINK@ 5%+",
+    "on-scroll-down": "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-",
+    "tooltip-format": "{desc} — {volume}%"
+  },
+
+  "temperature": {
+    "hwmon-path": "/sys/class/hwmon/hwmon7/temp1_input",
+    "critical-threshold": 82,
+    "format": "{temperatureC}°",
+    "format-critical": "{temperatureC}°",
+    "format-icons": [""],
+    "on-click": "$HOME/.config/waybar/scripts/sensors-menu.sh",
+    "tooltip": false
+  },
+
+  "backlight": {
+    "device": "nvidia_wmi_ec_backlight",
+    "format": "{icon}",
+    "format-icons": [" "," "," ","󰃝 ","󰃞 ","󰃟 ","󰃠 "],
+    "on-scroll-up":   "brightnessctl set +5%",
+    "on-scroll-down": "brightnessctl set 5%-",
+    "smooth-scrolling-threshold": 1,
+    "tooltip-format": "Brightness: {percent}%"
+  },
+
+  "bluetooth": {
+    "format": "󰂯",
+    "format-connected": "󰂱 {num_connections}",
+    "format-disabled":  "󰂲",
+    "format-off":       "󰂲",
+    "tooltip-format": "Bluetooth",
+    "tooltip-format-connected": "{device_enumerate}",
+    "tooltip-format-enumerate-connected": "󰂱 {device_alias}",
+    "on-click": "$HOME/.config/waybar/scripts/bluetooth-menu.sh"
+  },
+
+  "network": {
+    "interval": 2,
+    "format-wifi":         "{icon}",
+    "format-ethernet":     "󰌘",
+    "format-disconnected": "󰌙",
+    "format-icons": ["󰤯","󰤟","󰤢","󰤥","󰤨"],
+    "tooltip-format-wifi":        "{essid} — {signalStrength}%\n⬆ {bandwidthUpBytes}  ⬇ {bandwidthDownBytes}",
+    "tooltip-format-ethernet":    "{ifname} — {ipaddr}\n⬆ {bandwidthUpBytes}  ⬇ {bandwidthDownBytes}",
+    "tooltip-format-disconnected": "Disconnected",
+    "max-length": 20,
+    "on-click": "kitty --class network-settings -e nmtui"
+  },
+
+  "modules-left":   ["hyprland/workspaces"],
+  "modules-center": ["clock"],
+  "modules-right":  ["temperature","backlight","bluetooth","network","pulseaudio","battery"]
+}

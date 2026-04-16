@@ -1,0 +1,148 @@
+/* ─── Inkypinky Waybar ─── */
+
+@define-color bg       rgba(19, 19, 29, 0.93);
+@define-color text     #c8c8c8;
+@define-color accent   #9f859f;
+@define-color blue     #919ab7;
+@define-color pink     #D18BA2;
+@define-color inactive #434353;
+@define-color border   rgba(163, 178, 199, 0.12);
+
+* {
+  font-family: "JetBrainsMono Nerd Font";
+  font-weight: bold;
+  font-size: 9px;
+  min-height: 0;
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* Bar itself is transparent — pills handle the background */
+window#waybar {
+  background: transparent;
+  color: @text;
+}
+
+tooltip {
+  background: rgba(19, 19, 29, 0.97);
+  border-radius: 12px;
+  border: 1px solid @border;
+  color: @text;
+  padding: 4px 8px;
+}
+
+tooltip label {
+  color: @text;
+}
+
+/* ── Three pill sections ── */
+.modules-left {
+  background: @bg;
+  border-radius: 10px;
+  border: 1px solid @border;
+  padding: 0px 4px;
+  margin: 0 4px;
+}
+
+.modules-center {
+  background: @bg;
+  border-radius: 10px;
+  border: 1px solid @border;
+  padding: 0px 4px;
+  margin: 0 4px;
+  margin-right: 8px;
+}
+
+.modules-right {
+  background: @bg;
+  border-radius: 10px;
+  border: 1px solid @border;
+  padding: 0px 4px;
+  margin: 0 4px;
+}
+
+/* ── Workspaces ── */
+#workspaces {
+  padding: 0 4px;
+}
+
+#workspaces button.empty {
+  color: #3a3a55;
+}
+
+#workspaces button {
+  color: #8888aa;
+  background: transparent;
+  border-radius: 9px;
+  padding: 1px 3px;
+  margin: 1px 1px;
+  min-width: 14px;
+  transition: none;
+}
+
+#workspaces button.active {
+  color: @accent;
+  border-radius: 10px;
+  padding: 1px 3px;
+  min-width: 14px;
+  transition: none;
+}
+
+#workspaces button:hover {
+  color: @pink;
+  border-radius: 9px;
+}
+
+#workspaces button.urgent {
+  color: @pink;
+}
+
+/* ── Clock ── */
+#clock {
+  color: @pink;
+  padding: 0px 10px;
+  font-size: 10px;
+}
+
+/* ── Right bar modules ── */
+#battery,
+#pulseaudio,
+#temperature,
+#backlight,
+#bluetooth,
+#network {
+  padding: 0px 7px;
+}
+
+#battery           { color: @blue; }
+#battery.warning   { color: #e8c06a; }
+#battery.critical  { color: @pink; }
+#battery.charging,
+#battery.plugged   { color: #8fbf8f; }
+
+#battery.critical:not(.charging) {
+  animation-name: blink;
+  animation-duration: 1.5s;
+  animation-timing-function: steps(12);
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+@keyframes blink {
+  to { color: @inactive; }
+}
+
+#pulseaudio        { color: @accent; font-size: 11px; }
+#pulseaudio.muted  { color: @inactive; font-size: 11px; }
+
+#temperature           { color: @blue; }
+#temperature.critical  { color: @pink; }
+
+#backlight   { color: #c8b89f; }
+#bluetooth   { color: @blue; }
+
+#bluetooth.connected { color: @pink; }
+
+#network             { color: @accent; padding-right: 10px; }
+#network.disconnected { color: @inactive; padding-right: 10px; }

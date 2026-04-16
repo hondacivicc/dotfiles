@@ -1,0 +1,20 @@
+# Wallpapers (too large for git — place manually in ~/.config/wallpapers/)
+.config/wallpapers/
+
+# Hyprland runtime state
+.config/hypr/.wallpaper-mode
+.config/hypr/.wallpaper-index
+
+# Rofi runtime state
+.config/rofi/.current_wallpaper
+
+# Fish shell machine-specific state
+.config/fish/fish_variables
+
+# Neovim plugin data (managed by lazy.nvim at runtime)
+.config/nvim/.DS_Store
+
+# Editor junk
+*.swp
+*.swo
+.DS_Store

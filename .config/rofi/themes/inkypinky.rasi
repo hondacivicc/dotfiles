@@ -1,0 +1,152 @@
+/* inkypinky rofi theme */
+
+configuration {
+    modi:                    "drun,run,filebrowser";
+    show-icons:              true;
+    display-drun:            " apps";
+    display-run:             " term";
+    display-filebrowser:     " files";
+    display-window:          " window";
+    drun-display-format:     "{name}";
+    hover-select:            true;
+    me-select-entry:         "MouseSecondary";
+    me-accept-entry:         "MousePrimary";
+}
+
+* {
+    background:       #13131D;
+    background-alt:   #1e1e2e;
+    foreground:       #c8c8c8;
+    selected:         #D18BA2;
+    active:           #7c7ca8;
+    urgent:           #D18BA2;
+    text-selected:    #13131D;
+    text-color:       #c8c8c8;
+    border-color:     #9f859f;
+}
+
+window {
+    enabled:          true;
+    fullscreen:       false;
+    transparency:     "real";
+    cursor:           "default";
+    spacing:          0px;
+    border:           1px;
+    border-radius:    12px;
+    border-color:     @border-color;
+    location:         center;
+    anchor:           center;
+    width:            25%;
+    background-color: #13131Dee;
+}
+
+mainbox {
+    enabled:          true;
+    orientation:      vertical;
+    children:         [ "inputbar", "listbox" ];
+    background-color: transparent;
+}
+
+inputbar {
+    enabled:          true;
+    padding:          8px;
+    margin:           10px 10px 4px 10px;
+    background-color: #1e1e2ecc;
+    border-radius:    8px;
+    orientation:      horizontal;
+    children:         ["entry"];
+}
+
+entry {
+    enabled:          true;
+    expand:           true;
+    width:            100%;
+    padding:          8px;
+    border-radius:    8px;
+    background-color: transparent;
+    text-color:       @foreground;
+    cursor:           text;
+    placeholder:      "Search apps...";
+    placeholder-color: #434353;
+}
+
+listbox {
+    spacing:          0px;
+    padding:          0px 4px 10px 0px;
+    background-color: transparent;
+    orientation:      vertical;
+    children:         [ "listview" ];
+}
+
+listview {
+    enabled:          true;
+    columns:          1;
+    lines:            7;
+    cycle:            true;
+    dynamic:          true;
+    scrollbar:        false;
+    layout:           vertical;
+    spacing:          2px;
+    padding:          4px 0px;
+    background-color: transparent;
+}
+
+element {
+    enabled:          true;
+    spacing:          8px;
+    padding:          8px 8px;
+    border-radius:    8px;
+    background-color: transparent;
+    cursor:           pointer;
+}
+
+element normal.normal {
+    background-color: transparent;
+    text-color:       @foreground;
+}
+
+element selected.normal {
+    background-color: @selected;
+    text-color:       @text-selected;
+}
+
+element normal.active {
+    background-color: @active;
+    text-color:       @foreground;
+}
+
+element alternate.normal {
+    background-color: transparent;
+    text-color:       @foreground;
+}
+
+element-icon {
+    background-color: transparent;
+    text-color:       inherit;
+    size:             18px;
+    cursor:           inherit;
+}
+
+element-text {
+    background-color: transparent;
+    text-color:       inherit;
+    cursor:           inherit;
+    vertical-align:   0.5;
+    horizontal-align: 0.0;
+}
+
+scrollbar {
+    border:           0px;
+    border-radius:    4px;
+    background-color: transparent;
+    handle-color:     @active;
+    handle-width:     2px;
+    padding:          0;
+}
+
+error-message {
+    padding:          8px;
+    border-radius:    8px;
+    background-color: @background;
+    text-color:       @foreground;
+}
